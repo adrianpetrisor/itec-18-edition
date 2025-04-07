@@ -1,0 +1,84 @@
+:root {
+
+    /* - NAV - */
+    /* - COLORS - */
+    --primary-button-color: floralwhite;
+    --secondary-button-color: #000000;
+    --golden-color-button: #ECBF32;
+    --burger-button-color: floralwhite;
+
+    --background-gray: rgb(10, 10, 10);
+    --gray-border: rgba(200, 200, 200, 0.5);
+    --white: #DDDDDD;
+
+    /* - FONTS & SIZES - */
+    --primary-font: "Lato-900";
+    --secondary-font-m: "FunnelDisplay-Medium";
+    --secondary-font-r: "FunnelDisplay-Regular";
+    --bold-font: "BebasNeue";
+    --hero-font: "VoxRound-Bold";
+    --terminal-font: "Terminal";
+
+    --space-grotesk-r: "SpaceGrotesk-R";
+    --space-grotesk-b: "SpaceGrotesk-B";
+
+    /* ADD-ON */
+    --even-page: rgb(10, 10, 10);
+    --odd-page: rgb(10, 10, 10);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    user-select: none;
+    min-width: 412px;
+    background: rgb(10, 10, 10);
+}
+
+@font-face {
+    font-family: "Lato-900";
+    src: url("../fonts/Lato-Black-900.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: "FunnelDisplay-Medium";
+    src: url("../fonts/FunnelDisplay-Medium.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: "FunnelDisplay-Regular";
+    src: url("../fonts/FunnelDisplay-Regular.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: "VoxRound-Bold";
+    src: url("../fonts/VoxRound-BoldItalic.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: "VoxRound-Medium";
+    src: url("../fonts/VoxRoundWide-MedIt.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: "BebasNeue";
+    src: url("../fonts/BebasNeue-Regular.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: "Terminal";
+    src: url("../fonts/JetBrainsMonoNL-Medium.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: "SpaceGrotesk-B";
+    src: url("../fonts/SpaceGrotesk-Bold.ttf") format("opentype");
+}
+
+@font-face {
+    font-family: "SpaceGrotesk-R";
+    src: url("../fonts/SpaceGrotesk-Regular.ttf") format("opentype");
+}

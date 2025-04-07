@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iTEC - Google Authenticator</title>
+    <link rel = "stylesheet" type = 'text/css' th:href = "@{/stylesheets/default.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{/stylesheets/google-authenticator.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/notifications.css}">
+
+    <script th:src = "@{/js/jquery.min.js}"></script>
+    <script th:src = "@{/js/anime.min.js}"></script>
+    <script th:src = "@{/js/notifications.js}"></script>
+</head>
+<body>
+
+<!-- SUCCES NOTIFACATION-->
+<div class = "notification" id = "succes-notification">
+    <div class = "icon-container" style = "background-color: #04e40048;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #269b24;">
+            <path d = "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"></path>
+        </svg>
+    </div>
+
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #269b24;">YOU MADE IT!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #04e4003a;"></div>
+    </div>
+</div>
+
+<!-- FAIL NOTIFICATION-->
+<div class = "notification" id = "fail-notification">
+
+    <div class = "icon-container" style = "background-color: #fc0c0c48;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #d10d0d;">
+            <path d = "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"></path>
+        </svg>
+    </div>
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #d10d0d;">SOMETHING WENT WRONG!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #fc0c0c48;"></div>
+    </div>
+</div>
+
+<!-- WARNING NOTIFICATION -->
+<div class = "notification" id = "warning-notification">
+    <div class = "icon-container" style = "background-color: #ffa30d48;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 256 256" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #db970e;">
+            <path d = "M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM222.93,203.8a8.5,8.5,0,0,1-7.48,4.2H40.55a8.5,8.5,0,0,1-7.48-4.2,7.59,7.59,0,0,1,0-7.72L120.52,44.21a8.75,8.75,0,0,1,15,0l87.45,151.87A7.59,7.59,0,0,1,222.93,203.8ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"></path>
+        </svg>
+    </div>
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #db970e;">ATTENTION!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #ffa30d48;"></div>
+    </div>
+</div>
+
+<div class="auth-container">
+    <div class="auth-content">
+        <div class="auth-left">
+            <h2>Google Authenticator Setup</h2>
+            <p th:text="'Hi ' + ${account.getUsername()} + ', please scan the QR code with your authenticator app and enter the received code. Your QR code will expire in one minute.'">
+                Loading instructions...
+            </p>
+        </div>
+
+        <div class="auth-right">
+            <img th:src="${qrCode}" alt="QR Code" class="auth-qr" draggable="false" style="border-color: #5865f2; border-width: 4px; border-style: solid;">
+            <form class="auth-form" th:action="@{/googleAuthenticator}" th:object="${googleCode}" method="post">
+                <label for="confirmationCode">Enter the Google Authenticator code</label>
+                <input type="text" name="confirmationCode" id="confirmationCode" placeholder="123 456" required>
+                <button type="submit">Verify</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script th:inline="javascript">
+        var error = /*[[${error}]]*/ null
+        if(error) {
+            showNotification("fail", "Invalid Code");
+        }
+    </script>
+
+    <script th:src = "@{/js/googleAuth.js}"></script>
+</body>
+</html>

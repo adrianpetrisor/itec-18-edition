@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iTEC - Create Event</title>
+    <link rel="stylesheet" th:href="@{/stylesheets/default.css}">
+    <link rel="stylesheet" th:href="@{/stylesheets/create-event.css}">
+</head>
+<body class="create-event-body">
+
+<div class="auth-container">
+    <h1 class="auth-title">Create Session</h1>
+    <p class="auth-description">Fill out the form below to create a new session</p>
+
+    <span th:if="${error}" th:text="${error}" class="auth-error"></span>
+
+    <form th:action="@{/createEvent}" th:object="${eventModel}" th:method="post" class="auth-form">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter event name">
+
+        <label for="starts">Starts in</label>
+        <input type="datetime-local" id="starts" name="starts" required>
+
+        <label for="topic">Topic of interest</label>
+        <input type="text" id="topic" name="topic" hidden="hidden" value="Web Development" required placeholder="Topic of interest">
+
+        <div class="interest-select-box">
+            <select id="interest-select" class="big-dropdown">
+                <option value="">Choose a topic</option>
+                <option value="AI">AI</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Blockchain">Blockchain</option>
+                <option value="DevOps">DevOps</option>
+                <option value="Game Development">Game Development</option>
+            </select>
+        </div>
+
+        <button type="submit" class="auth-btn">Create Session!</button>
+    </form>
+</div>
+
+<script th:src = "@{/js/jquery.min.js}"></script>
+
+<script>
+    $("#interest-select").change(function () {
+        $("#topic").val($(this).val());
+    });
+</script>
+
+</body>
+</html>

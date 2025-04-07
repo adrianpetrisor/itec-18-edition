@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang = "en-EN">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+    <meta name = "description" content = "iTEC Cometition - Web Full Stack-Development">
+    <meta name = "author" content = "(c) ADRIAN PETRISOR and MLADIN ALEXANDRU">
+    <meta name = "keywords" content = "itec, competition, programming, web, development">
+    <meta name = "version" content = "1.0.0">
+    <link rel = "icon" type = "image/png" th:href="@{media/web-icon.png}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/default.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/home-page.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/media-screens.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/navigation-bar.css}">
+    <title>iTEC - MAIN PAGE</title>
+</head>
+<body>
+
+<section class = "hero-section web-section" id = "home">
+    <div class = "container">
+        <div class = "content">
+
+            <section class = "navigation-bar">
+                <div class = "left-column">
+                    <img class = "itec-logo" src = "media/itec-logo.png" width = "150" height = "auto" draggable = "false" alt = "iTEC Logo">
+                </div>
+
+                <div class = "center-column">
+                    <button class = "navigation-button searching-button" type = "button" id = "navigation-button-features">FEATURES</button>
+                    <button class = "navigation-button searching-button" type = "button" id = "navigation-button-terminal">TERMINAL</button>
+                    <button class = "navigation-button searching-button" type = "button" id = "navigation-button-account" onclick = "location.href = '/events'">SESSIONS</button>
+                    <button class = "navigation-button searching-button" type = "button" id = "navigation-button-eventhub" onclick = "location.href = '/account'">ACCOUNT</button>
+
+                    <button class = "navigation-button searching-button hidden" type = "button" id = "navigation-button-phone-auth" sec:authorize="!isAuthenticated()" onclick="window.location.href='/login'">AUTHENTICATION</button>
+                    <button class = "navigation-button searching-button hidden" type = "button" id = "navigation-button-phone-register" sec:authorize="!isAuthenticated()" onclick="window.location.href='/register'">REGISTER</button>
+
+                    <form  class = "hidden" sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+                        <button type="submit" class = "logout-button">Logout</button>
+                    </form>
+                </div>
+
+                <div class = "right-column">
+
+                    <div class = "navigation-bar-phone-menu">
+                        <div class = "menu-icon">
+                            <input class = "menu-icon__cheeckbox" type = "checkbox"/>
+                            <div>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "navigation-bar-authentication">
+                        <button class = "navigation-login-button authentication-buttons" type = "button" id = "navigation-button-login" sec:authorize="!isAuthenticated()" onclick="window.location.href='/login'">AUTHENTICATION</button>
+                        <button class = "navigation-register-button authentication-buttons" type = "button" id = "navigation-button-register" sec:authorize="!isAuthenticated()" onclick="window.location.href='/register'">REGISTER</button>
+                    </div>
+
+                    <form class = "hidden-on-mobiles" sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">
+                        <button type="submit" class = "logout-button">Logout</button>
+                    </form>
+
+                </div>
+            </section>
+
+<!--                <span sec:authorize="isAuthenticated()">You are authenticated.</span>-->
+<!--                <span th:if="${message}" th:text="${message}"></span> <br>-->
+<!--                <span th:if="${error}" th:text="${error}"></span> <br>-->
+<!--                <button sec:authorize="!isAuthenticated()" onclick="window.location.href='/login'">Login</button>-->
+<!--                <button sec:authorize="!isAuthenticated()" onclick="window.location.href='/register'">Register</button>-->
+<!--                <form sec:authorize="isAuthenticated()" th:action="@{/logout}" th:method="post">-->
+<!--                    <button type="submit">Logout</button>-->
+<!--                </form>-->
+
+            <div class = "content-separator">
+                <div class = "hero-text">
+                    <span>SMART LEARNING</span>
+                    <span>CONNECT WITH OTHERS</span>
+                    <span>LEARN, GROW, AND SUCCEED</span>
+                </div>
+
+                <div class = "hero-3d-object">
+                    <div class = "object"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class = "sub-section web-section" id = "features">
+    <div class = "left-container">
+        <div class = "overlay"></div>
+    </div>
+
+    <div class = "right-container">
+        <div class = "separator">
+            <div class = "feature-label">
+                <h2>WHY SO SPECIAL?</h2>
+                <h1>FEATURES</h1>
+            </div>
+            <div class="feature-container">
+                <div class="timeline">
+                    <div class="feature active" onclick="showContent(this)">
+                        <div class="circle"></div>
+                        <div class="text">
+                            <p class="category">COLLABORATIVE LEARNING</p>
+                            <p class="description" style="display: block; opacity: 1;">Our platform enables students to learn together, collaborate in real-time, and share notes, ideas, and questions for a deeper understanding of the material.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature" onclick="showContent(this)">
+                        <div class="circle"></div>
+                        <div class="text">
+                            <p class="category">STUDY SESSIONS</p>
+                            <p class="description">Create or join focused study sessions with other students. Set goals, divide tasks, and stay motivated with the support of your learning group.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature" onclick="showContent(this)">
+                        <div class="circle"></div>
+                        <div class="text">
+                            <p class="category">REAL-TIME SUPPORT</p>
+                            <p class="description">Got a tricky concept or a quick question? Reach out to fellow students instantly and get the help you need, when you need it.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature" onclick="showContent(this)">
+                        <div class="circle"></div>
+                        <div class="text">
+                            <p class="category">VISIBLE PROGRESS</p>
+                            <p class="description">Track your learning journey, see how many hours you’ve studied, and build confidence as you get closer to acing your exams.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class = "sub-section web-section terminal-section" id = "terminal-container">
+    <div class="terminal-container">
+        <div class="terminal" id="terminal">
+            <div id="output">
+              <pre class = "ascii-itec">
+$$\ $$$$$$$$\ $$$$$$$$\  $$$$$$\
+\__|\__$$  __|$$  _____|$$  __$$\
+$$\    $$ |   $$ |      $$ /  \__|
+$$ |   $$ |   $$$$$\    $$ |
+$$ |   $$ |   $$  __|   $$ |
+$$ |   $$ |   $$ |      $$ |  $$\
+$$ |   $$ |   $$$$$$$$\ \$$$$$$  |
+\__|   \__|   \________| \______/
+            </pre>
+                <div>Type <strong>help</strong> in order to see the available commands.</div>
+            </div>
+            <div class="input-line">
+                <span class="prompt">user@root:~$</span>
+                <div id="command-input" contenteditable="true"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class = "sub-section web-section footer-section" id = "footer">
+    <div class = "newsletter-container">
+        <div class = "newsletter-photo">
+            <div class = "obiect-3d"></div>
+        </div>
+
+        <div class = "newsletter-content">
+            <div class = "newsletter-text">
+                <h2>Want to stay in touch?</h2>
+                <h1>NEWSLETTER <span>SUBSCRIBE</span></h1>
+                <p>In order to start receiving our news, all you have to do is enter your email address. Everything else will be taken care of by us. We will send you emails containing information about our project.</p>
+            </div>
+
+            <div class = "newsletter-subscription-area">
+                <input class = "email-input" type = "email" placeholder = "Enter your email address">
+                <button class = "subscription-button">Subscribe now!</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class = "footer-container">
+        <div class = "footer-top-section">
+            <div class = "footer-itec-logo">
+                <img src = "media/itec-logo.png" width = "150px" height = "auto" draggable = false alt = "iTEC Logo">
+            </div>
+
+            <div class = "footer-links">
+                <button class = "footer-buttons" draggable = "false" id = "footer-home-button">HOME</button>
+                <button class = "footer-buttons" draggable = "false" id = "footer-about-button">ABOUT</button>
+                <button class = "footer-buttons" draggable = "false" sec:authorize="!isAuthenticated()" onclick="window.location.href='/register'">REGISTER</button>
+                <button class = "footer-buttons" draggable = "false" sec:authorize="!isAuthenticated()" onclick="window.location.href='/login'">AUTHENTICATION</button>
+            </div>
+
+            <div class = "footer-socials">
+
+                <div class = "instagram" onclick="openInstagram()">
+                    <svg xmlns = "http://www.w3.org/2000/svg" x = "0px" y = "0px" width = "50" height = "50" viewBox = "0 0 24 24">
+                        <path d = "M 8 3 C 5.243 3 3 5.243 3 8 L 3 16 C 3 18.757 5.243 21 8 21 L 16 21 C 18.757 21 21 18.757 21 16 L 21 8 C 21 5.243 18.757 3 16 3 L 8 3 z M 8 5 L 16 5 C 17.654 5 19 6.346 19 8 L 19 16 C 19 17.654 17.654 19 16 19 L 8 19 C 6.346 19 5 17.654 5 16 L 5 8 C 5 6.346 6.346 5 8 5 z M 17 6 A 1 1 0 0 0 16 7 A 1 1 0 0 0 17 8 A 1 1 0 0 0 18 7 A 1 1 0 0 0 17 6 z M 12 7 C 9.243 7 7 9.243 7 12 C 7 14.757 9.243 17 12 17 C 14.757 17 17 14.757 17 12 C 17 9.243 14.757 7 12 7 z M 12 9 C 13.654 9 15 10.346 15 12 C 15 13.654 13.654 15 12 15 C 10.346 15 9 13.654 9 12 C 9 10.346 10.346 9 12 9 z"></path>
+                    </svg>
+                </div>
+                <div class = "facebook" onclick="openFacebook()">
+                    <svg xmlns = "http://www.w3.org/2000/svg" x = "0px" y = "0px" width = "50" height = "50" viewBox = "0 0 24 24">
+                        <path d = "M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z"></path>
+                    </svg>
+                </div>
+                <div class = "website" onclick="openWebsite()">
+                    <svg class = "w-6 h-6 text-gray-800 dark:text-white" aria-hidden = "true" xmlns = "http://www.w3.org/2000/svg" width = "50" height = "50" fill = "none" viewBox = "0 0 24 24">
+                        <path stroke = "currentColor" stroke-linecap = "round" stroke-linejoin = "round" stroke-width = "2" d = "M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class = "border"></div>
+
+        <div class = "footer-bottom-section">
+            <span>developed by ADRIAN PETRIȘOR & MLADIN ALEXANDRU for itec.ro competition</span>
+        </div>
+    </div>
+</section>
+    <script type = "module" th:src="@{/js/three-object-renderer.js}"></script>
+    <script th:src = "@{/js/jquery.min.js}"></script>
+    <script th:src = "@{/js/anime.min.js}"></script>
+    <script th:src = "@{/js/home-page.js}"></script>
+    <script th:src = "@{/js/navigation-bar.js}"></script>
+    <script th:src = "@{/js/terminal.js}"></script>
+</body>
+</html>

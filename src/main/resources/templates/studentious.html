@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang = "en-EN">
+<head>
+    <meta charset = "UTF-8" />
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+    <meta name = "description" content = "iTEC Cometition - Web Full Stack-Development">
+    <meta name = "author" content = "(c) ADRIAN PEETRISOR and MLADIN ALEXANDRU">
+    <meta name = "keywords" content = "itec, competition, programming, web, development">
+    <meta name = "version" content = "1.0.0">
+    <link rel = "icon" type = "image/png" th:href="@{../media/web-icon.png}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{../stylesheets/default.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{../stylesheets/studentions.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{../stylesheets/notifications.css}">
+
+    <meta name="_csrf" th:attr="content=${_csrf.token}">
+    <meta name="_csrf_header" th:attr="content=${_csrf.headerName}">
+
+    <title>iTEC - Studentious App</title>
+</head>
+<body>
+<!-- SUCCES NOTIFACATION-->
+<div class = "notification" id = "succes-notification">
+    <div class = "icon-container" style = "background-color: #04e40048;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #269b24;">
+            <path d = "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"></path>
+        </svg>
+    </div>
+
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #269b24;">YOU MADE IT!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #04e4003a;"></div>
+    </div>
+</div>
+
+<!-- FAIL NOTIFICATION-->
+<div class = "notification" id = "fail-notification">
+
+    <div class = "icon-container" style = "background-color: #fc0c0c48;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #d10d0d;">
+            <path d = "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"></path>
+        </svg>
+    </div>
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #d10d0d;">SOMETHING WENT WRONG!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #fc0c0c48;"></div>
+    </div>
+</div>
+
+<!-- WARNING NOTIFICATION -->
+<div class = "notification" id = "warning-notification">
+
+    <div class = "icon-container" style = "background-color: #ffa30d48;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 256 256" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #db970e;">
+            <path d = "M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM222.93,203.8a8.5,8.5,0,0,1-7.48,4.2H40.55a8.5,8.5,0,0,1-7.48-4.2,7.59,7.59,0,0,1,0-7.72L120.52,44.21a8.75,8.75,0,0,1,15,0l87.45,151.87A7.59,7.59,0,0,1,222.93,203.8ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"></path>
+        </svg>
+    </div>
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #db970e;">ATTENTION!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #ffa30d48;"></div>
+    </div>
+</div>
+
+<div class="event-list">
+    <div class="app-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 19.5V6.75C4 5.09315 5.34315 3.75 7 3.75H20V17.25H7C5.34315 17.25 4 18.5931 4 20.25V19.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 20.25V6.75C4 5.09315 5.34315 3.75 7 3.75H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="app-title">Studentious App</span>
+    </div>
+    <div class="event-items">
+        <div class="event-hub-preview">
+            <div class="hub-header">
+                <h2>Session Hub</h2>
+                <button class="btn-glass" onclick="window.location.href='../eventHub'">Go to Hub</button>
+            </div>
+
+            <div class="hub-description">
+                <p>Discover, connect, and participate in our wide range of sessions. The full session hub is just a click away!</p>
+            </div>
+
+            <div class="hub-divider">
+                <span class="divider-text">Your Joined Sessions</span>
+            </div>
+
+            <div class="joined-events-list">
+                <div th:each="memberOf : ${memberOfEvents}" class="custom-event-card" th:style="${memberOf.getEventID() == event.getEventID()} ? 'border: 4px solid gray;' : ''">
+                    <div class="custom-event-info">
+                        <h3 class="custom-event-title" th:text="${memberOf.getEventName()}"></h3>
+                        <p class="custom-event-desc" th:text="'Topic: ' + ${memberOf.getTopic()}"></p>
+                        <div class="custom-btn-wrapper">
+                            <a th:href="'../events/' + ${memberOf.getEventID()}"><button class="custom-btn-glass">View</button></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="account-warning" th:if="${account.getUniversity() == null || account.getUniversity().isEmpty() || account.getFaculty() == null || account.getFaculty().isEmpty()}">
+        <svg width="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 9v4m0 4h.01M10.29 3.86l-7.5 13A1 1 0 003.6 19h16.8a1 1 0 00.86-1.5l-7.5-13a1 1 0 00-1.72 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Your account is not fully set up. Please complete your profile entering the settings area.</span>
+    </div>
+
+    <div class="current-user">
+        <img th:src="${account.getAvatar() == null || account.getAvatar().isEmpty()} ? 'https://i.imgur.com/TxeN6cJ.png' : ${account.getAvatar()}" alt="User" />
+        <div class="user-info">
+            <span class="user-fullname" th:text="${account.getFirstName()} + ' ' + ${account.getLastName()}"></span>
+            <span class="user-nickname" th:text="'@' + ${account.getUsername()}"></span>
+        </div>
+        <button class="settings-btn" title="Settings" onclick = "location.href='/account'">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Line" width="32" height="20">
+                <path d="m17.074 30h-2.148c-1.038 0-1.914-.811-1.994-1.846l-.125-1.635c-.687-.208-1.351-.484-1.985-.824l-1.246 1.067c-.788.677-1.98.631-2.715-.104l-1.52-1.52c-.734-.734-.78-1.927-.104-2.715l1.067-1.246c-.34-.635-.616-1.299-.824-1.985l-1.634-.125c-1.035-.079-1.846-.955-1.846-1.993v-2.148c0-1.038.811-1.914 1.846-1.994l1.635-.125c.208-.687.484-1.351.824-1.985l-1.068-1.247c-.676-.788-.631-1.98.104-2.715l1.52-1.52c.734-.734 1.927-.779 2.715-.104l1.246 1.067c.635-.34 1.299-.616 1.985-.824l.125-1.634c.08-1.034.956-1.845 1.994-1.845h2.148c1.038 0 1.914.811 1.994 1.846l.125 1.635c.687.208 1.351.484 1.985.824l1.246-1.067c.787-.676 1.98-.631 2.715.104l1.52 1.52c.734.734.78 1.927.104 2.715l-1.067 1.246c.34.635.616 1.299.824 1.985l1.634.125c1.035.079 1.846.955 1.846 1.993v2.148c0 1.038-.811 1.914-1.846 1.994l-1.635.125c-.208.687-.484 1.351-.824 1.985l1.067 1.246c.677.788.631 1.98-.104 2.715l-1.52 1.52c-.734.734-1.928.78-2.715.104l-1.246-1.067c-.635.34-1.299.616-1.985.824l-.125 1.634c-.079 1.035-.955 1.846-1.993 1.846zm-5.835-6.373c.848.53 1.768.912 2.734 1.135.426.099.739.462.772.898l.18 2.341 2.149-.001.18-2.34c.033-.437.347-.8.772-.898.967-.223 1.887-.604 2.734-1.135.371-.232.849-.197 1.181.089l1.784 1.529 1.52-1.52-1.529-1.784c-.285-.332-.321-.811-.089-1.181.53-.848.912-1.768 1.135-2.734.099-.426.462-.739.898-.772l2.341-.18h-.001v-2.148l-2.34-.18c-.437-.033-.8-.347-.898-.772-.223-.967-.604-1.887-1.135-2.734-.232-.37-.196-.849.089-1.181l1.529-1.784-1.52-1.52-1.784 1.529c-.332.286-.81.321-1.181.089-.848-.53-1.768-.912-2.734-1.135-.426-.099-.739-.462-.772-.898l-.18-2.341-2.148.001-.18 2.34c-.033.437-.347.8-.772.898-.967.223-1.887.604-2.734 1.135-.37.232-.849.197-1.181-.089l-1.785-1.529-1.52 1.52 1.529 1.784c.285.332.321.811.089 1.181-.53.848-.912 1.768-1.135 2.734-.099.426-.462.739-.898.772l-2.341.18.002 2.148 2.34.18c.437.033.8.347.898.772.223.967.604 1.887 1.135 2.734.232.37.196.849-.089 1.181l-1.529 1.784 1.52 1.52 1.784-1.529c.332-.287.813-.32 1.18-.089z" id="XMLID_1646_" fill="#7D8590"></path>
+                <path d="m16 23c-3.859 0-7-3.141-7-7s3.141-7 7-7 7 3.141 7 7-3.141 7-7 7zm0-12c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" fill="#7D8590" id="XMLID_1645_"></path>
+            </svg>
+        </button>
+    </div>
+</div>
+<div class="drop-overlay" id="dropOverlay">
+    <div class="drop-content">
+        <p>Please select a photo.</p>
+        <span>Max file size: 10MB</span>
+    </div>
+</div>
+<div class="drop-overlay" id="fileDropOverlay">
+    <div class="drop-content">
+        <p>Please select a document.</p>
+        <span>Max file size: 10MB</span>
+    </div>
+</div>
+
+<input type="file" id="fileInputImages" accept="image/*" style="display: none;" />
+<input type="file" id="fileInputGeneric" style="display: none;" />
+
+<div class="event-interface">
+    <button class="burger-toggle" id="burgerToggle" title="Open menu">☰</button>
+    <div class="menu-overlay" id="menuOverlay"></div>
+    <div class="chat-event">
+        <div class="event-header">
+            <div class="channel-label">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 3L8.75 7.5L8.61111 8L7.77778 11M5 21L6.94444 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19 3L14 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 9H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 16H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="channel-name" th:text="${event.getEventName()}"></span>
+            </div>
+            <button class="toggle-users" title="Toggle participants">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="chat-event-messages" class="chat-event-messages">
+            <div th:each="message : ${messages}" th:attr="class=${message.key.getType() == 1} ? 'chat-message ai-response' : 'chat-message'">
+                <img th:src="${message.value.getAvatar() == null || message.value.getAvatar().isEmpty()} ? 'https://i.imgur.com/TxeN6cJ.png' : ${message.value.getAvatar()}" th:if="${message.key.getType() != 1}" alt="User Avatar">
+                <img th:src="@{../media/ChatGPT.png}" th:if="${message.key.getType() == 1}" alt="User Avatar">
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="user-name" th:if="${message.key.getType() != 1}" th:text="${message.value.getFirstName()} + ' ' + ${message.value.getLastName()}"></span>
+                        <span class="user-name" th:if="${message.key.getType() == 1}">Studentious AI</span>
+                        <div class="message-timestamp">
+                            <span class="message-date" th:text="${message.key.getTime().toString().replace('T', ' ')}"></span>
+                        </div>
+                    </div>
+                    <span class="user-message" th:if="${message.key.getType() == 0 || message.key.getType() == 1}" th:text="${message.key.getContent()}"></span>
+                    <div class="image-message" th:if="${message.key.getType() == 2}">
+                        <a th:href="${message.key.getContent()}" target="_blank">
+                            <img th:src="${message.key.getContent()}" alt="Sent Image">
+                        </a>
+                    </div>
+                    <div class="file-message" th:if="${message.key.getType() == 3}">
+                        <div class="file-icon">
+                            📄
+                        </div>
+                        <div class="file-info">
+                            <span class="file-name"><a th:href="${message.key.getContent()}" style="color: #ffffff">Click here to open the file.</a></span>
+                        </div>
+                    </div>
+
+                    <iframe th:if="${message.key.getType() == 4}" width="450" height="250"
+                        th:src="'https://www.youtube.com/embed/' + ${message.key.getContent().substring(message.key.getContent().lastIndexOf('v') + 2)}"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-event-input">
+            <input id="message" placeholder="Type a message in the event chat...">
+            <div class="chat-actions">
+                <button title="Ask AI" class = "ask-ai-button" id="ask-ai">AI</button>
+
+                <button title="Photos">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20 5h-3.2l-1.8-2H9l-1.8 2H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2zm-8 13a5 5 0 110-10 5 5 0 010 10z"/>
+                    </svg>
+                </button>
+
+                <button title="Files">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M10 4H4a2 2 0 00-2 2v1h20V6a2 2 0 00-2-2h-8l-2-2zm10 5H2v9a2 2 0 002 2h16a2 2 0 002-2V9z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="registered-event-users">
+        <div class="user-section" th:if="${professors.size() > 0}">
+            <div class="section-header">PROFESSORS — <span id="teacher-count" th:text="${professors.size()}"></span></div>
+            <div class="user-list" id="teacher-list">
+                <div class="user-card" th:each="professor : ${professors}" th:attr="data-role=${professor.role}, data-university=${professor.university}, data-faculty = ${professor.faculty}, data-description = ${professor.description}">
+                    <img th:src="${professor.getAvatar() == null || professor.getAvatar().isEmpty()} ? 'https://i.imgur.com/TxeN6cJ.png' : ${professor.getAvatar()}" alt="User">
+                    <span th:text="${professor.getFirstName()} + ' ' + ${professor.getLastName()}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="user-section" th:if="${students.size() > 0}">
+            <div class="section-header">STUDENTS — <span id="student-count" th:text="${students.size()}"></span></div>
+            <div class="user-list" id="student-list">
+                <div class="user-card" th:each="student : ${students}" th:attr="data-role=${student.role}, data-university=${student.university}, data-faculty = ${student.faculty}, data-description = ${student.description}">
+                    <img th:src="${student.getAvatar() == null || student.getAvatar().isEmpty()} ? 'https://i.imgur.com/TxeN6cJ.png' : ${student.getAvatar()}" alt="User">
+                    <span th:text="${student.getFirstName()} + ' ' + ${student.getLastName()}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-preview hidden" id="userPreview">
+        <div class="preview-avatar">
+            <img id="previewAvatar" src="" alt="User Avatar">
+        </div>
+        <div class="preview-info">
+            <strong id="previewName"></strong>
+            <span id="previewRole" class="preview-role"></span>
+            <p id="previewUniversity" class="preview-bio">University: Not specified.</p>
+            <p id="previewFaculty" class="preview-bio">Faculty: Not specified.</p>
+            <p id="previewBio" class="preview-bio">No description</p>
+        </div>
+    </div>
+
+</div>
+    <script th:src = "@{../js/jquery.min.js}"></script>
+    <script th:src = "@{../js/studentious.js}"></script>
+    <script th:src = "@{../js/notifications.js}"></script>
+
+    <script th:src="@{../js/stomp.min.js}"></script>
+    <script th:src="@{../js/sockjs.min.js}"></script>
+
+    <script th:inline="javascript">
+        const $eventChat = $("#chat-event-messages")
+        const simpleMessage = "            <div class=\"chat-message\">\n" +
+            "                <img src=\"{senderAvatar}\" alt=\"User Avatar\">\n" +
+            "                <div class=\"message-content\">\n" +
+            "                    <div class=\"message-header\">\n" +
+            "                        <span class=\"user-name\">{displayName}</span>\n" +
+            "                        <div class=\"message-timestamp\">\n" +
+            "                            <span class=\"message-date\">{messageDate}</span>\n" +
+            "                            <span class=\"message-hour\">{messageHour}</span>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                    <span class=\"user-message\">{message}</span>\n" +
+            "                </div>\n" +
+            "            </div>"
+
+        const AIMessage = "            <div class=\"chat-message ai-response\">\n" +
+            "                <img src=\"../media/ChatGPT.png\" alt=\"AI Avatar\">\n" +
+            "                <div class=\"message-content\">\n" +
+            "                    <div class=\"message-header\">\n" +
+            "                        <span class=\"user-name\">Studentious AI</span>\n" +
+            "                        <div class=\"message-timestamp\">\n" +
+            "                            <span class=\"message-date\">{messageDate}</span>\n" +
+            "                            <span class=\"message-hour\">{messageHour}</span>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                    <span class=\"user-message\">{message}</span>\n" +
+            "                </div>\n" +
+            "            </div>"
+
+
+        const ImageMessage = "            <div class=\"chat-message\">\n" +
+            "                <img src=\"{senderAvatar}\" alt=\"User Avatar\">\n" +
+            "                <div class=\"message-content\">\n" +
+            "                    <div class=\"message-header\">\n" +
+            "                        <span class=\"user-name\">{displayName}</span>\n" +
+            "                        <div class=\"message-timestamp\">\n" +
+            "                            <span class=\"message-date\">{messageDate}</span>\n" +
+            "                            <span class=\"message-hour\">{messageHour}</span>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "\n" +
+            "                    <div class=\"image-message\">\n" +
+            "                        <a href=\"{message}\" target=\"_blank\">\n" +
+            "                            <img src=\"{message}\" alt=\"Sent Image\">\n" +
+            "                        </a>\n" +
+            "                    </div>\n" +
+            "\n" +
+            "                </div>\n" +
+            "            </div>"
+
+
+        const DocumentMessage = "           <div class=\"chat-message\">\n" +
+            "                <img src=\"{senderAvatar}\" alt=\"User Avatar\">\n" +
+            "                <div class=\"message-content\">\n" +
+            "                    <div class=\"message-header\">\n" +
+            "                        <span class=\"user-name\">{displayName}</span>\n" +
+            "                        <div class=\"message-timestamp\">\n" +
+            "                            <span class=\"message-date\">{messageDate}</span>\n" +
+            "                            <span class=\"message-hour\">{messageHour}</span>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                    <div class=\"file-message\">\n" +
+            "                        <div class=\"file-icon\">\n" +
+            "                            📄\n" +
+            "                        </div>\n" +
+            "                        <div class=\"file-info\">\n" +
+            "                            <span class=\"file-name\"><a href=\"{message}\" style=\"color:#ffffff\">Click here to open the file.</a></span>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "            </div>"
+
+
+        const YouTubeVideo = "            <div class=\"chat-message\">\n" +
+            "                <img src=\"{senderAvatar}\" alt=\"User Avatar\">\n" +
+            "                <div class=\"message-content\">\n" +
+            "                    <div class=\"message-header\">\n" +
+            "                        <span class=\"user-name\">{displayName}</span>\n" +
+            "                        <div class=\"message-timestamp\">\n" +
+            "                            <span class=\"message-date\">{messageDate}</span>\n" +
+            "                            <span class=\"message-hour\">{messageHour}</span>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                    <span class=\"user-message\">\n" +
+            "                    <a href=\{message}\" target=\"_blank\">{message}</a>\n" +
+            "    </span>\n" +
+            "<iframe width=\"450\" height=\"250\"\n" +
+            "    src=\"https://www.youtube.com/embed/{videoID}\"\n" +
+            "    title=\"YouTube video player\"\n" +
+            "    frameborder=\"0\"\n" +
+            "    allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\"\n" +
+            "    allowfullscreen>\n" +
+            "</iframe>" +
+            "                </div>"
+
+        function appendMessage(message) {
+            switch (message["type"]) {
+                case "0": {
+                    $eventChat.append(simpleMessage.replace("{message}", message["content"]).
+                    replace("{displayName}", message["senderDisplayName"]).replace("{senderAvatar}", message["senderAvatar"])
+                        .replace("{messageDate}",message["time"].split(" ")[0]).replace("{messageHour}", message["time"].split(" ")[1]));
+
+                    break;
+                }
+
+                case "1": {
+                    $eventChat.append(AIMessage.replace("{message}", message["content"]).replace("{messageDate}",message["time"].split(" ")[0]).replace("{messageHour}", message["time"].split(" ")[1]));
+                    break;
+                }
+
+                case "2": {
+                    $eventChat.append(ImageMessage.replace("{displayName}", message["senderDisplayName"]).replace("{senderAvatar}", message["senderAvatar"]).
+                    replaceAll("{message}", message["content"]).replace("{messageDate}",message["time"].split(" ")[0]).replace("{messageHour}", message["time"].split(" ")[1]));
+                    break;
+                }
+
+                case "3": {
+                    $eventChat.append(DocumentMessage.replace("{displayName}", message["senderDisplayName"]).replace("{senderAvatar}", message["senderAvatar"]).
+                    replace("{message}", message["content"]).replace("{messageDate}",message["time"].split(" ")[0]).replace("{messageHour}", message["time"].split(" ")[1]));
+                    break
+                }
+
+                case "4": {
+                    $eventChat.append(YouTubeVideo.replaceAll("{message}", message["content"]).
+                    replace("{displayName}", message["senderDisplayName"]).replace("{senderAvatar}", message["senderAvatar"])
+                        .replace("{messageDate}",message["time"].split(" ")[0]).replace("{messageHour}", message["time"].split(" ")[1]).replace("{videoID}", new URL(message["content"]).searchParams.get("v")));
+                    break
+                }
+            }
+        }
+
+        var chatID = /*[[${event.getEventID()}]]*/ null
+        var accountID = /*[[${account.getUniqueID()}]]*/ null
+
+        const socket = new SockJS("/ws-chat")
+        const stompClient = Stomp.over(socket);
+
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+
+        stompClient.connect({
+            "X-XSRF-TOKEN": csrfToken,
+        }, function(frame) {
+            stompClient.subscribe('/topic/chat/' + chatID, function(message) {
+                appendMessage(JSON.parse(message.body));
+            });
+
+            stompClient.subscribe('/topic/private/' + accountID, function(message) {
+                serverResponse = JSON.parse(message.body);
+                showNotification(serverResponse["status"], serverResponse["content"]);
+            });
+
+            showNotification("success", "Connected to event chat.");
+        });
+
+        function sendMessage(message, AI) {
+            stompClient.send("/app/chat/" + chatID + "/send", {}, JSON.stringify({"content": message, "AI": AI}));
+        }
+
+        $('#message').on('keypress', function (e) {
+            if (e.which === 13) {
+                const message = $(this).val();
+
+                if(!(message.trim().length === 0)) {
+                    sendMessage(message, "false");
+                    $(this).val('');
+                }
+            }
+        });
+
+        $('#ask-ai').on('click', function() {
+            const message = $('#message').val();
+            if(!(message.trim().length === 0)) {
+                sendMessage(message, "true");
+                $('#message').val('');
+            }
+        });
+
+        const fileSizeLimit = 10 * 1024 * 1024;
+
+        $('#fileInputImages').on('change', function() {
+            const file = this.files[0];
+            if(file.type === 'image/jpeg' || file.type === 'image/png') {
+                if(file.size < fileSizeLimit) {
+                    var fileData = new FormData()
+                    fileData.append('file', file)
+
+                    $.ajax({
+                        url: '/upload/' + chatID,
+                        type: 'POST',
+                        headers: {
+                            "X-XSRF-TOKEN": csrfToken,
+                        },
+
+                        data: fileData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            mappedData = JSON.parse(data);
+                            showNotification(mappedData["status"], mappedData["content"]);
+                            $('#fileInputImages').val('')
+                        },
+
+                        error: function(e) {
+                            mappedData = JSON.parse(e.responseText);
+                            showNotification(mappedData["status"], mappedData["content"]);
+                            $('#fileInputImages').val('')                        }
+                    });
+
+                    $(".drop-overlay")[0].removeClass("active");
+                }else {
+                    showNotification("fail", "The file is too big.")
+                }
+            }else {
+                showNotification("fail", "Invalid file type.")
+            }
+        });
+
+        $("#fileInputGeneric").on('change', function() {
+            const file = this.files[0];
+
+            const allowedExtensions = ['txt', 'doc', 'docx', 'pdf', 'xls', 'xlsx'];
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.split('.').pop();
+
+            if (allowedExtensions.includes(fileExtension)) {
+                if(file.size < fileSizeLimit) {
+                    var fileData = new FormData()
+                    fileData.append('file', file)
+
+                    $.ajax({
+                        url: '/upload/' + chatID,
+                        type: 'POST',
+                        headers: {
+                            "X-XSRF-TOKEN": csrfToken,
+                        },
+
+                        data: fileData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            mappedData = JSON.parse(data);
+                            showNotification(mappedData["status"], mappedData["content"]);
+                            $('#fileInputGeneric').val('')
+                        },
+
+                        error: function(e) {
+                            mappedData = JSON.parse(e.responseText);
+                            showNotification(mappedData["status"], mappedData["content"]);
+                            $('#fileInputGeneric').val('')
+                        }
+                    });
+
+                    $(".drop-overlay").removeClass("active");
+                }else {
+                    showNotification("fail", "The file is too big.")
+                }
+            }else {
+                showNotification("fail", "File format not supported.")
+            }
+
+        });
+
+    </script>
+</body>
+</html>

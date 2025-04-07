@@ -1,0 +1,11 @@
+Model Information:
+* title:	Stylized newspaper
+* source:	https://sketchfab.com/3d-models/stylized-newspaper-972f084ea5b944e38fa99a56d1372b1b
+* author:	Zayfert1999 (https://sketchfab.com/Zayfert1999)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Stylized newspaper" (https://sketchfab.com/3d-models/stylized-newspaper-972f084ea5b944e38fa99a56d1372b1b) by Zayfert1999 (https://sketchfab.com/Zayfert1999) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

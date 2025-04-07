@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <meta http-equiv = "X-UA-Compatible" content = "ie=edge">
+    <title>Registration Form - iTEC</title>
+    <meta name = "description" content = "Registration Form for iTEC application!">
+    <meta name = "author" content = "(c) ADRIAN PETRISOR & MLADIN ALEXANDRU">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/registration.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/default.css}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/notifications.css}">
+    <link rel = "icon" type = "image/png" th:href="@{media/web-icon.png}">
+
+    <script th:src = "@{/js/jquery.min.js}"></script>
+    <script th:src = "@{/js/anime.min.js}"></script>
+    <script th:src = "@{/js/notifications.js}"></script>
+</head>
+<body>
+
+    <!-- SUCCES NOTIFACATION-->
+    <div class = "notification" id = "succes-notification">
+        <div class = "icon-container" style = "background-color: #04e40048;">
+            <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #269b24;">
+                <path d = "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"></path>
+            </svg>
+        </div>
+
+        <div class = "message-text-container">
+            <p class = "message-text" style = "color: #269b24;">YOU MADE IT!</p>
+            <p class = "sub-text">Autentificarea a fost realizata!</p>
+        </div>
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+            <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+        </svg>
+
+        <div class = "progress-container">
+            <div class = "progress-bar" style = "background-color: #04e4003a;"></div>
+        </div>
+    </div>
+
+    <!-- FAIL NOTIFICATION-->
+    <div class = "notification" id = "fail-notification">
+
+        <div class = "icon-container" style = "background-color: #fc0c0c48;">
+            <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #d10d0d;">
+                <path d = "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"></path>
+            </svg>
+        </div>
+        <div class = "message-text-container">
+            <p class = "message-text" style = "color: #d10d0d;">SOMETHING WENT WRONG!</p>
+            <p class = "sub-text">Credentialele sunt gresite.</p>
+        </div>
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+            <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+        </svg>
+
+        <div class = "progress-container">
+            <div class = "progress-bar" style = "background-color: #fc0c0c48;"></div>
+        </div>
+    </div>
+
+    <!-- WARNING NOTIFICATION -->
+    <div class = "notification" id = "warning-notification">
+
+        <div class = "icon-container" style = "background-color: #ffa30d48;">
+            <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 256 256" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #db970e;">
+                <path d = "M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM222.93,203.8a8.5,8.5,0,0,1-7.48,4.2H40.55a8.5,8.5,0,0,1-7.48-4.2,7.59,7.59,0,0,1,0-7.72L120.52,44.21a8.75,8.75,0,0,1,15,0l87.45,151.87A7.59,7.59,0,0,1,222.93,203.8ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"></path>
+            </svg>
+        </div>
+        <div class = "message-text-container">
+            <p class = "message-text" style = "color: #db970e;">ATTENTION!</p>
+            <p class = "sub-text">Parola ta este mult prea slaba!</p>
+        </div>
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+            <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+        </svg>
+
+        <div class = "progress-container">
+            <div class = "progress-bar" style = "background-color: #ffa30d48;"></div>
+        </div>
+    </div>
+
+
+    <section class = "registration-form">
+        <div class = "text-container">
+            <span class = "title">REGISTRATION</span>
+            <span class = "description">In order to access this section you need to create an account.</span>
+        </div>
+
+        <div class = "input-container">
+            <form class = "registration" th:action="@{/register}" th:object="${registerUserModel}" method="post">
+                <label class = "label">
+                  <span class = "icon">
+                    <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                          <path d="m1.5 13v1a.5.5 0 0 0 .3379.4731 18.9718 18.9718 0 0 0 6.1621 1.0269 18.9629 18.9629 0 0 0 6.1621-1.0269.5.5 0 0 0 .3379-.4731v-1a6.5083 6.5083 0 0 0 -4.461-6.1676 3.5 3.5 0 1 0 -4.078 0 6.5083 6.5083 0 0 0 -4.461 6.1676zm4-9a2.5 2.5 0 1 1 2.5 2.5 2.5026 2.5026 0 0 1 -2.5-2.5zm2.5 3.5a5.5066 5.5066 0 0 1 5.5 5.5v.6392a18.08 18.08 0 0 1 -11 0v-.6392a5.5066 5.5066 0 0 1 5.5-5.5z" fill="#7D8590"></path>
+                    </svg>
+                  </span>
+                    <input type = "text" class = "input" name="firstName" placeholder = "Enter your first name" autocomplete = "off"/>
+                </label>
+
+                <label class = "label">
+                  <span class = "icon">
+                    <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                          <path d="m1.5 13v1a.5.5 0 0 0 .3379.4731 18.9718 18.9718 0 0 0 6.1621 1.0269 18.9629 18.9629 0 0 0 6.1621-1.0269.5.5 0 0 0 .3379-.4731v-1a6.5083 6.5083 0 0 0 -4.461-6.1676 3.5 3.5 0 1 0 -4.078 0 6.5083 6.5083 0 0 0 -4.461 6.1676zm4-9a2.5 2.5 0 1 1 2.5 2.5 2.5026 2.5026 0 0 1 -2.5-2.5zm2.5 3.5a5.5066 5.5066 0 0 1 5.5 5.5v.6392a18.08 18.08 0 0 1 -11 0v-.6392a5.5066 5.5066 0 0 1 5.5-5.5z" fill="#7D8590"></path>
+                    </svg>
+                  </span>
+                    <input type = "text" class = "input" name="lastName" placeholder = "Enter your last name" autocomplete = "off"/>
+                </label>
+
+                <label class = "label">
+                  <span class = "icon">
+                    <svg class = "text-white/40 hover:text-white transition-colors" stroke-linejoin = "round" stroke-linecap = "round" stroke-width = "2" stroke = "currentColor" fill = "none" viewBox = "0 0 24 24" height = "20" xmlns = "http://www.w3.org/2000/svg">
+                      <path d = "m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                    </svg>
+                  </span>
+                    <input type = "text" class = "input" name="username" placeholder = "Enter your username" autocomplete = "off"/>
+                </label>
+
+                <label class = "label">
+                  <span class = "icon">
+                    <svg height = "20" viewBox = "0 0 32 32" width = "20" xmlns = "http://www.w3.org/2000/svg">
+                      <g id = "Layer_3" data-name = "Layer 3">
+                        <path d = "m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z" fill = "#c5c5c5"></path>
+                      </g>
+                    </svg>
+                  </span>
+                    <input type = "email" class = "input" name = "email" placeholder = "Enter email address" autocomplete = "off"/>
+                </label>
+
+
+                <label class="label">
+                <span class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20" fill="currentColor" viewBox="0 0 16 16" class="bi bi-calendar">
+                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h.5A1.5 1.5 0 0 1 15 2.5v11A1.5 1.5 0 0 1 13.5 15h-11A1.5 1.5 0 0 1 1 13.5v-11A1.5 1.5 0 0 1 2.5 1H3V.5a.5.5 0 0 1 .5-.5zM2.5 2a.5.5 0 0 0-.5.5V4h12V2.5a.5.5 0 0 0-.5-.5h-11zM14 5H2v8.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V5z"/>
+                    </svg>
+                </span>
+                    <input type="date" class="input input-date" name="birthday" autocomplete="off" />
+                </label>
+
+
+                <label class = "label">
+                  <span class = "icon">
+                    <svg height = "20" viewBox = "-64 0 512 512" width = "20" xmlns = "http://www.w3.org/2000/svg">
+                      <path d = "m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0" fill = "#c5c5c5"></path>
+                      <path d = "m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0" fill = "#c5c5c5"></path>
+                    </svg>
+                  </span>
+                    <input type = "password" class = "input" id = "password" name = "password" placeholder = "Enter password" autocomplete = "off"/>
+                </label>
+
+                <button class = "registration-button" type = "submit">
+                    <svg xmlns = "http://www.w3.org/2000/svg" fill = "none" viewBox = "0 0 24 24" stroke-width = "1.5" stroke = "currentColor" class = "w-6 h-6">
+                        <path stroke-linecap = "round" stroke-linejoin = "round" d = "M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                    </svg>
+                    <div class = "text">REGISTER NOW</div>
+                </button>
+            </form>
+        </div>
+
+        <p class = "signup-link">You have an active account?<a href = "/templates/login.html" class = "signup-link link"> Log in now</a></p>
+    </section>
+        <script th:inline="javascript">
+            var error = /*[[${error}]]*/ null
+            if(error) {
+                showNotification("fail", error);
+            }
+        </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+:root {
+    --secondary-hud-font: "VoxRound-Bold";
+    --invisible-background: rgba(0, 0, 0, 0);
+    --secondary-hud-font-regular: "FunnelDisplay-Regular";
+}
+
+.navigation-bar {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.product-name {
+    color: var(--primary-button-color);
+    font-family: var(--secondary-hud-font), sans-serif;
+    font-size: 20px;
+}
+
+.left-column, .center-column, .right-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 10px 0;
+}
+
+.left-column, .right-column {
+    min-width: 30%;
+}
+
+.center-column {
+    min-width: 40%;
+}
+
+.navigation-bar-authentication {
+    display: flex;
+}
+
+.navigation-button {
+    background-color: var(--invisible-background);
+    border: none;
+    font-family: var(--secondary-hud-font-regular), sans-serif;
+    margin-left: 25px;
+    font-size: 20px;
+    color: var(--primary-button-color);
+    letter-spacing: 2px;
+
+    text-decoration: none;
+    background-image: linear-gradient(#ECBF32, #d99a5a);
+    background-size: 0 0.1em;
+    background-position-y: 100%;
+    background-position-x: 50%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease-in-out;
+}
+
+.navigation-button:hover,
+.navigation-button:focus,
+.navigation-button:active {
+    background-size: 100% 0.1em;
+}
+
+.authentication-buttons {
+    width: 220px;
+    height: auto;
+    padding: 7px;
+    transition: all 0.25s ease-out;
+}
+
+.authentication-buttons:hover {
+    transform: translateY(-3px);
+}
+
+.navigation-login-button {
+    margin-right: 7px;
+    background-color: var(--invisible-background);
+    color: var(--primary-button-color);
+    border: none;
+
+    letter-spacing: 3px;
+    font-size: 16px;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.navigation-register-button {
+    background: var(--golden-color-button);
+    color: var(--secondary-button-color);
+
+    font-family: var(--secondary-hud-font), sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    border: 1px solid rgba(103, 103, 103, 0.63);
+    border-radius: 4px;
+    outline: 2px solid var(--golden-color-button);
+    outline-offset: 2px;
+    display: initial;
+}
+
+.menu-icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.menu-icon .menu-icon__cheeckbox {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    -webkit-touch-callout: none;
+    opacity: 0;
+}
+
+.menu-icon div {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 22px;
+    height: 12px;
+}
+
+.menu-icon span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--burger-button-color, #000);
+    border-radius: 1px;
+    transition: all 0.2s cubic-bezier(0.1, 0.82, 0.76, 0.965);
+}
+
+.menu-icon span:first-of-type {
+    top: 0;
+}
+
+.menu-icon span:last-of-type {
+    bottom: 0;
+}
+
+.menu-icon.active span:first-of-type,
+.menu-icon .menu-icon__cheeckbox:checked + div span:first-of-type {
+    transform: rotate(45deg);
+    top: 5px;
+}
+
+.menu-icon.active span:last-of-type,
+.menu-icon .menu-icon__cheeckbox:checked + div span:last-of-type {
+    transform: rotate(-45deg);
+    bottom: 5px;
+}
+
+.menu-icon.active:hover span:first-of-type,
+.menu-icon.active:hover span:last-of-type,
+.menu-icon:hover .menu-icon__cheeckbox:checked + div span:first-of-type,
+.menu-icon:hover .menu-icon__cheeckbox:checked + div span:last-of-type {
+    width: 22px;
+}
+
+@media screen and (max-width: 1520px) {
+    .navigation-login-button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1180px) {
+    .navigation-bar-authentication {
+        display: none;
+    }
+
+    .navigation-bar {
+        flex-wrap: wrap;
+    }
+
+    .center-column {
+        flex-direction: column;
+        order: 2;
+        flex-basis: 100%;
+    }
+
+    .right-column {
+        display: flex;
+        justify-content: flex-end;
+        width: 70%;
+        order: 1;
+    }
+
+    .left-column {
+        width: 20%;
+    }
+
+    .navigation-button {
+        padding: 10px;
+    }
+}
+
+@media screen and (min-width: 1181px) {
+    .center-column {
+        display: flex;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .navigation-bar-phone-menu {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .menu-icon:hover span:first-of-type {
+        width: 26px;
+    }
+    .menu-icon:hover span:last-of-type {
+        width: 12px;
+    }
+}

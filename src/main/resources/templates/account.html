@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+    <meta name = "description" content = "iTEC Cometition - Web Full Stack-Development">
+    <meta name = "author" content = "(c) ADRIAN PETRISOR and MLADIN ALEXANDRU">
+    <meta name = "keywords" content = "itec, competition, programming, web, development">
+    <meta name = "version" content = "1.0.0">
+
+    <meta name="_csrf" th:attr="content=${_csrf.token}">
+    <meta name="_csrf_header" th:attr="content=${_csrf.headerName}">
+
+    <link rel = "icon" type = "image/png" th:href="@{media/web-icon.png}">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{stylesheets/default.css}">
+    <link rel = "stylesheet" type = "text/css" th:href="@{/stylesheets/account.css}">
+    <link rel = "stylesheet" type = "text/css" th:href="@{/stylesheets/notifications.css}">
+    <title>Studentious - Account Settings</title>
+</head>
+<body>
+<!-- SUCCES NOTIFACATION-->
+<div class = "notification" id = "succes-notification">
+    <div class = "icon-container" style = "background-color: #04e40048;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #269b24;">
+            <path d = "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"></path>
+        </svg>
+    </div>
+
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #269b24;">YOU MADE IT!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #04e4003a;"></div>
+    </div>
+</div>
+
+<!-- FAIL NOTIFICATION-->
+<div class = "notification" id = "fail-notification">
+
+    <div class = "icon-container" style = "background-color: #fc0c0c48;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 512 512" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #d10d0d;">
+            <path d = "M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"></path>
+        </svg>
+    </div>
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #d10d0d;">SOMETHING WENT WRONG!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #fc0c0c48;"></div>
+    </div>
+</div>
+
+<!-- WARNING NOTIFICATION -->
+<div class = "notification" id = "warning-notification">
+    <div class = "icon-container" style = "background-color: #ffa30d48;">
+        <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 256 256" stroke-width = "0" fill = "currentColor" stroke = "currentColor" class = "icon" style = "color: #db970e;">
+            <path d = "M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM222.93,203.8a8.5,8.5,0,0,1-7.48,4.2H40.55a8.5,8.5,0,0,1-7.48-4.2,7.59,7.59,0,0,1,0-7.72L120.52,44.21a8.75,8.75,0,0,1,15,0l87.45,151.87A7.59,7.59,0,0,1,222.93,203.8ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"></path>
+        </svg>
+    </div>
+    <div class = "message-text-container">
+        <p class = "message-text" style = "color: #db970e;">ATTENTION!</p>
+        <p class = "sub-text"></p>
+    </div>
+    <svg xmlns = "http://www.w3.org/2000/svg" viewBox = "0 0 15 15" stroke-width = "0" fill = "none" stroke = "currentColor" class = "cross-icon">
+        <path fill = "currentColor" d = "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z" clip-rule = "evenodd" fill-rule = "evenodd"></path>
+    </svg>
+
+    <div class = "progress-container">
+        <div class = "progress-bar" style = "background-color: #ffa30d48;"></div>
+    </div>
+</div>
+
+
+<button class="burger-btn" id="toggleSidebar" aria-label="Toggle Menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+</button>
+
+<div class="account-settings-wrapper">
+
+    <div class="account-sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-title">SETTINGS</span>
+        </div>
+
+        <div class="sidebar-items-wrapper">
+            <div class="sidebar-item active" data-section="profile">My Profile</div>
+            <div class="sidebar-item" data-section="security">Security</div>
+            <div class="sidebar-item" data-section="university">University Info</div>
+            <div class="sidebar-item" data-section="preferences">Preferences</div>
+        </div>
+    </div>
+
+    <div class="account-settings-content">
+        <div id="profile" class="settings-section active">
+            <div class="settings-box profile-box">
+                <div class="profile-header">
+                    <img th:src="${account.getAvatar() == null || account.getAvatar().isEmpty()} ? 'https://i.imgur.com/TxeN6cJ.png' : ${account.getAvatar()}" alt="Profile Picture" class="profile-avatar" draggable="false"/>
+                    <div class="profile-info">
+                        <h2 class="profile-name" th:text="${account.getFirstName()} + ' ' + ${account.getLastName()}"></h2>
+                        <span class="profile-rank" th:text="${account.getRole()}"></span>
+                    </div>
+                </div>
+
+                <div class="profile-details">
+                    <div class="detail-item"><span class="label">Username:</span> <span class="value" th:text="${account.getUsername()}"></span></div>
+                    <div class="detail-item"><span class="label">Email:</span> <span class="value" th:text="${account.getEmail()}"></span></div>
+                    <div class="detail-item"><span class="label">Birthday:</span> <span class="value" th:text="${account.getBirthday()}"></span></div>
+                    <div class="detail-item"><span class="label">Account Created:</span> <span class="value" th:text="${account.getCreated().toString().replace('T', ' ')}"></span></div>
+                    <div class="detail-item" style = "border: none;"><span class="label">Last Login:</span> <span class="value" th:text="${account.getLastLogin().toString().replace('T', ' ')}"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="security" class="settings-section">
+            <div class="settings-box security-box">
+                <h2 class="section-title">Two-Factor Authentication</h2>
+                <p class="section-description" th:if="${account.getGoogleAuthKey() == null || account.getGoogleAuthKey().isEmpty()}">
+                    Protect your account by enabling 2FA with Google Authenticator.
+                </p>
+
+                <div class="twofa-toggle" th:if="${account.getGoogleAuthKey() == null || account.getGoogleAuthKey().isEmpty()}">
+                    <span class="twofa-label">Google Authenticator:</span>
+                    <a th:href="@{/googleAuthenticator}">
+                        <button id="toggle2FA" class="twofa-button disable-btn">Enable 2FA</button>
+                    </a>
+                </div>
+
+                <div id="disable2FASection" class="disable-2fa-section" th:unless="${account.getGoogleAuthKey() == null || account.getGoogleAuthKey().isEmpty()}">
+                    <p class="section-description">
+                        To disable Google Authenticator, enter your 6-digit code.
+                    </p>
+                    <div class="disable-2fa-form">
+                        <form th:action="@{/removeGoogleAuthenticator}" th:object="${googleCode}" th:method="post">
+                            <input type="text" id="disable2FACode" placeholder="Enter 6-digit code"
+                                   maxlength="6" pattern="[0-9]*" name="confirmationCode" inputmode="numeric">
+                            <button id="submitDisable2FA" class="disable-btn">Disable 2FA</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="university" class="settings-section">
+            <div class="settings-box university-box">
+                <h2 class="section-title">University Information</h2>
+                <p class="section-description">
+                    Below are the details related to your academic status.
+                </p>
+
+                <div class="university-detail">
+                    <span class="label">University:</span>
+                    <span class="value" th:text="${account.getUniversity() == null || account.getUniversity().isEmpty()} ? 'Not specified' : ${account.getUniversity()}"></span>
+                </div>
+
+                <div class="university-detail">
+                    <span class="label">Faculty:</span>
+                    <span class="value" th:text="${account.getFaculty() == null || account.getFaculty().isEmpty()} ? 'Not specified' : ${account.getFaculty()}"></span>
+                </div>
+
+                <div class="university-detail">
+                    <span class="label">Role:</span>
+                    <span class="value" th:text="${account.getRole()}"></span>
+                </div>
+
+                <div class="interest-topics-box">
+                    <h3 class="section-subtitle">Your Interests</h3>
+                    <div id="selected-interests" class="selected-interests" th:if="${account.getTopicOfInterest() != null && !account.getTopicOfInterest().isEmpty()}">
+                        <span class="interest-tag" th:each="interest : ${account.getTopicOfInterest().split('&')}" th:if="${interest != null && !interest.isEmpty()}" th:text="${interest}"></span>
+                    </div>
+                </div>
+
+                <div class="interest-select-box">
+                    <select id="interest-select" class="big-dropdown">
+                        <option value="">Choose a topic</option>
+                        <option value="AI">AI</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Web Development">Web Development</option>
+                        <option value="Blockchain">Blockchain</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="Game Development">Game Development</option>
+                    </select>
+                </div>
+
+                <div id="interest-live-preview" class="interest-live-preview">
+                    <span class="no-interests">No interests selected yet</span>
+                </div>
+
+                <form th:attr="action='/userAPI/' + ${account.getUniqueID()} + '/interests'" th:object="${userInterests}" th:method="post"  class="university-edit-box">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input type="hidden" id="interests" value="" name="interests"/>
+
+                    <button id="saveInterestsBtn" class="save-btn" type="submit">Save Interests</button>
+                </form>
+
+                <form th:attr="action='/userAPI/' + ${account.getUniqueID()} + '/academics'" th:object="${academics}" th:method="post"  class="university-edit-box">
+                    <label for="university-input">University</label>
+                    <input type="text" id="university-input" name="university" placeholder="Enter your university" />
+
+                    <label for="faculty-input">Faculty</label>
+                    <input type="text" id="faculty-input" name="faculty" placeholder="Enter your faculty" />
+
+                    <label for="role-select">Role</label>
+                    <select id="role-select">
+                        <option value="Student">Student</option>
+                        <option value="Professor">Professor</option>
+                    </select>
+
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <input id="role-input" type="text" name="role" value="student" hidden="hidden">
+
+                    <button class="save-btn" id="saveUniversityBtn" type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="preferences" class="settings-section">
+
+            <div class="settings-box preferences-box">
+                <h2 class="section-title">Profile Preferences</h2>
+                <p class="section-description">
+                    Upload a new avatar to personalize your profile.
+                </p>
+
+                <div class="avatar-upload-container">
+                    <img id="avatarPreview" th:src="${account.getAvatar() == null || account.getAvatar().isEmpty()} ? 'https://i.imgur.com/TxeN6cJ.png' : ${account.getAvatar()}" alt="Current Avatar" class="avatar-preview" draggable="false" />
+
+                    <input type="file" id="avatarInput" accept="image/*" hidden>
+                    <label for="avatarInput" class="upload-btn">Upload New Avatar</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script th:src = "@{/js/jquery.min.js}"></script>
+<script th:src = "@{/js/account.js}"></script>
+<script th:src = "@{/js/notifications.js}"></script>
+<script th:src = "@{/js/image-preview.js}"></script>
+
+<script th:inline="javascript">
+    var userID = /*[[${account.getUniqueID()}]]*/ null
+
+    $('#role-select').on('change', function() {
+        $('#role-input').val($(this).val().toLowerCase());
+    });
+
+    var error = /*[[${error}]]*/ null
+    var message = /*[[${message}]]*/ null
+    if(error) {
+        showNotification("fail", error);
+    }
+
+    if(message) {
+        showNotification("success", message);
+    }
+
+    const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+    var fileSizeLimit = 10 * 1024 * 1024;
+
+    $('#avatarInput').on('change', function() {
+        if(userID == null || userID == '') {
+            showNotification("fail", "Can't upadte your profile picture");
+            return
+        }
+
+        const file = this.files[0];
+        if(file.type === 'image/jpeg' || file.type === 'image/png') {
+            if(file.size < fileSizeLimit) {
+                var fileData = new FormData()
+                fileData.append('file', file)
+
+                $.ajax({
+                    url: '/userAPI/' + userID + "/avatar",
+                    type: 'POST',
+                    headers: {
+                        "X-XSRF-TOKEN": csrfToken,
+                    },
+
+                    data: fileData,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        mappedData = JSON.parse(data);
+                        showNotification(mappedData["status"], mappedData["content"]);
+                        $('#fileInputImages').val('')
+                    },
+
+                    error: function(e) {
+                        mappedData = JSON.parse(e.responseText);
+                        showNotification(mappedData["status"], mappedData["content"]);
+                        $('#fileInputImages').val('')                        }
+                });
+            }else {
+                showNotification("fail", "The file is too big.")
+            }
+        }else {
+            showNotification("fail", "Invalid file type.")
+        }
+    });
+</script>
+</body>
+</html>
